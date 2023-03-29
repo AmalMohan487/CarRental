@@ -129,3 +129,12 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 RAZOR_KEY_ID = "rzp_test_9tCOZuKLhiZdaM"
 RAZOR_KEY_SECRET = "IfMivqkfXWvuJi2IR10W4bzN"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_HOST_PASSWORD = 'yxcsozxxvhbnjolr'  
+EMAIL_HOST_USER = 'email.con.auth@gmail.com'  
+EMAIL_PORT = 465  
+EMAIL_USE_SSL = True  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

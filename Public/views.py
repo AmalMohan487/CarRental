@@ -6,6 +6,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from .decorators import admin_only,unauthenticated_user,allowed_user
 from car.models import CarDetail
+from django.template.loader import render_to_string  
+
+from django.core.mail import send_mail
 
 
 @admin_only
@@ -54,9 +57,24 @@ def SignUp(request):
                 messages.info(request,"email Already exists")
                 return redirect('SignUp')
             else:
-                form.save()
+                user = form.save(commit=False)  
+                user.is_active = False 
+                user.save()
+                message = render_to_string('email.html', {
+                    'user': user,
+                    'pk':user.id,  
+                 
+                })  
+
+                send_mail(
+                    'hy',
+                    message,
+                    'settings.EMAIL_HOST_USER', 
+                    [email] )
                 messages.success(request,"User Created")
-                return redirect(SignIn)
+                pk=user.id
+                return redirect('log',pk)
+
 
     context = {"form":form}
     return render(request,'register.html',context)
@@ -64,4 +82,20 @@ def SignUp(request):
 def SignOut(request):
     logout(request)
     return redirect('Index')
+
+def log(request,pk):
+    user=User.objects.get(id=pk)
+    check=user.is_active
+    context ={
+        'check':check
+    }
+
+    return render(request,'log.html',context)
+
+def activate(request,pk):
+    user=User.objects.get(id=pk)
+    user.is_active = True
+    user.save()  
+
+    return redirect('SignIn')
 # Create your views here.
