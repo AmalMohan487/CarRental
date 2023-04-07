@@ -58,22 +58,12 @@ def SignUp(request):
                 return redirect('SignUp')
             else:
                 user = form.save(commit=False)  
-                user.is_active = False 
+                
                 user.save()
-                message = render_to_string('email.html', {
-                    'user': user,
-                    'pk':user.id,  
-                 
-                })  
-
-                send_mail(
-                    'hy',
-                    message,
-                    'settings.EMAIL_HOST_USER', 
-                    [email] )
+          
                 messages.success(request,"User Created")
-                pk=user.id
-                return redirect('log',pk)
+              
+                return redirect('SignIn')
 
 
     context = {"form":form}
