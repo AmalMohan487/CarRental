@@ -1,6 +1,0 @@
-[submodule "hallo"]
-	path = hallo
-	url = https://github.com/AmalMohan487/CarRental.git
-[submodule "rend"]
-	path = rend
-	url = https://github.com/AmalMohan487/CarRental.git
