@@ -99,7 +99,7 @@ def paymenthandler(request):
             }
             result = razorpay_client.utility.verify_razorpay_signature(params_dict)
             if result is not None:
-                amount = 2000
+                amount = 4000
                 razorpay_client.payment.capture(payment_id,amount)
                 return HttpResponse("Payment Done")
             else:

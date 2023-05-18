@@ -2,19 +2,23 @@
 {% block content %}
 
 <style>
+    .container{
+        margin-top: 0%;
+    }
     .inputcontainer{
-        width: 500px;
-        height: 600px;
+        margin-left: 200px;
+        width: 300px;
+        height: 300px;
         margin: auto;
         margin-top: 5%;
-        
-        
+         /* border: 1px solid blue;  */
+        /* background-color:aliceblue; */
         text-align: center;
 
     }
     .inputcontainer input{
         padding: 5px;
-        border-radius: 20px;
+        border-radius: 10px;
 
 
     }
@@ -23,13 +27,13 @@
 
     }
     .inputcontainer button{
-        width:auto;
+        width: 60px;
         border-radius: 10px;
         background-color: #183661;
         color: aliceblue;
         font-size: 15px;
     }
-    .inputcontainer h2{
+    .inputcontainer h1{
         font-size: 50px;
     }
     .inputcontainer button:hover{
@@ -40,21 +44,15 @@
 
 </style>
 
-<section class="banner_main">
+<section class="">
     <div class="container">
+       
             <div class="inputcontainer">
-                <h2 style="color:aqua;">Booker Details</h2>
-              <form  method ="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                 {% for  field in form  %}
-                 <h4 style="color: whitesmoke;">{{field.label}}:</h4>
-                 {{field}}<br><br>
-
-                 {% endfor %}
-                <button type="submit" > Save details</button>
-                
-              </form>
-             </div>
+               <h3>want to rend your car</h3>
+               <a href="">click here</a>
+            </div>
+             
+          
     </div>
  </section>
-{% endblock %}
+{% endblock  %}

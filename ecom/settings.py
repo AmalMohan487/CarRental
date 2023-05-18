@@ -78,9 +78,13 @@ WSGI_APPLICATION = "ecom.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'CarRental',
+        'USER' : 'postgres',
+        'PORT' : 5432,
+        'PASSWORD' : 'amal',
+        'HOST' : 'localhost'
     }
 }
 
@@ -133,8 +137,8 @@ RAZOR_KEY_SECRET = "IfMivqkfXWvuJi2IR10W4bzN"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
 EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_HOST_PASSWORD = 'gizzasctfdxthdls'  
-EMAIL_HOST_USER = 'auth.email.djan@gmail.com'   
+EMAIL_HOST_PASSWORD = 'zyhpvhnokwiyfvyy'  
+EMAIL_HOST_USER = 'email.con.auth@gmail.com'  
 EMAIL_PORT = 465  
 EMAIL_USE_SSL = True  
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

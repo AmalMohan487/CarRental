@@ -76,7 +76,17 @@ def ViewCar(request,pk):
 
 @login_required(login_url="SignIn")
 def ViewAll(request):
-    product =CarDetail.objects.all()
+    if 'Search' in request.GET:
+        car= request.GET['Search']
+        if car.isdigit():
+            product=CarDetail.objects.filter(Car_Rent__lte=car)
+        else:
+            product=CarDetail.objects.filter(Car_Name=car)
+            
+             
+        
+    else:
+        product =CarDetail.objects.all()
     context = {
         "product":product
     }

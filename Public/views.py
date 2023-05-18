@@ -7,13 +7,16 @@ from django.contrib.auth import authenticate,login,logout
 from .decorators import admin_only,unauthenticated_user,allowed_user
 from car.models import CarDetail
 from django.template.loader import render_to_string  
-
+from django.contrib.auth.models import Group
+from django.contrib.sites.shortcuts import get_current_site  
 from django.core.mail import send_mail
 
 
 @admin_only
 def Index(request):
     product =CarDetail.objects.all()
+
+            
     context = {
         "product":product
     }
@@ -58,12 +61,28 @@ def SignUp(request):
                 return redirect('SignUp')
             else:
                 user = form.save(commit=False)  
-                
+                user.is_active = False  
                 user.save()
+                current_site = get_current_site(request)
+                message = render_to_string('email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'pk':user.id,  
+                 
+                })  
+
+                send_mail(
+                    'hy',
+                    message,
+                    'settings.EMAIL_HOST_USER', 
+                    [email] )
+                
           
                 messages.success(request,"User Created")
+                pk=user.id
+                return redirect('log',pk)
               
-                return redirect('SignIn')
+                
 
 
     context = {"form":form}
@@ -88,4 +107,17 @@ def activate(request,pk):
     user.save()  
 
     return redirect('SignIn')
+
+def con(request):
+    user=request.user
+    gr=Group.objects.get(name='owner')
+    gr.user_set.add(user)
+    return render(request,'contact.html')
+
+def search(request):
+    return render(request,'search.html')
+
+
+
+
 # Create your views here.
